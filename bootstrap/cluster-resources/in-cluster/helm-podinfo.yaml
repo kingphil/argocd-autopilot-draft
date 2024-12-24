@@ -14,3 +14,10 @@ spec:
     path: bootstrap/cluster-resources/in-cluster/helm-podinfo
     repoURL: https://github.com/kingphil/argocd-autopilot-draft
     targetRevision: main
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - allowEmpty=true
