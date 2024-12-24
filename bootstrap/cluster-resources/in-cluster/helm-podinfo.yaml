@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: bootstrap/cluster-resources/in-cluster/helm-podinfo
+    path: bootstrap/cluster-resources/apps/helm-podinfo
     repoURL: https://github.com/kingphil/argocd-autopilot-draft
     targetRevision: main
   syncPolicy:
