@@ -15,14 +15,8 @@ spec:
     repoURL: https://github.com/kingphil/argocd-autopilot-draft
     targetRevision: main
     helm:
-      valuesObject:
-        ingress:
-          enabled: true
-          hosts:
-            - host: podinfo.development.pekware.club
-              paths:
-                - path: /
-                  pathType: ImplementationSpecific
+      valueFiles:
+      - values.in-cluster.yaml
   syncPolicy:
     automated:
       allowEmpty: true
