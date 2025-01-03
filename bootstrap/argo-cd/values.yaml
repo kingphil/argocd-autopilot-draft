@@ -1,0 +1,15 @@
+argo-cd:
+  global:
+    domain: argocd.development.pekware.club
+  configs:
+    cm:
+      timeout.reconciliation: 10s  ## DEVEL
+    ## https://artifacthub.io/packages/helm/argo/argo-cd#ssl-termination-at-ingress-controller
+    params:
+      server.insecure: true
+  server:
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
