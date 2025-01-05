@@ -2,7 +2,7 @@ podinfo:
   ingress:
     enabled: true
     hosts:
-    - host: podinfo.development.pekware.club
+    - host: podinfo.staging.pekware.club
       paths:
         - path: /
           pathType: ImplementationSpecific
