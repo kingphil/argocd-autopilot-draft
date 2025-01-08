@@ -1,6 +1,7 @@
 podinfo:
   ingress:
     enabled: true
+    className: nginx
     hosts:
     - host: podinfo.staging.pekware.club
       paths:
