@@ -1,0 +1,20 @@
+ingress-nginx:
+  controller:
+    ingressClassResource:
+      default: true
+
+    kind: Deployment
+    replicaCount: 1
+
+    service:
+      enabled: true
+      type: LoadBalancer
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: "ingress.staging.pekware.club"
+
+    extraArgs:
+      default-ssl-certificate: "kube-system/star.development.pekware.club"
+
+    hostNetwork: false
+    hostPort:
+      enabled: false
