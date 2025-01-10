@@ -1,0 +1,6 @@
+cilium:
+  bgpControlPlane:
+    enabled: true
+
+  operator:
+    replicas: 1
