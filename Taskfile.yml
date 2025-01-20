@@ -1,0 +1,13 @@
+version: '3'
+
+tasks:
+  kind-create:
+    desc: Create kind development cluster
+    cmds:
+      - kind create cluster --name lab --kubeconfig $HOME/.kube/kind
+
+  kind-delete:
+    desc: Delete kind development cluster
+    cmds:
+      - KUBECONFIG=$HOME/.kube/kind kind delete cluster --name lab
+      - rm -f $HOME/.kube/kind
