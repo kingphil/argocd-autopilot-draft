@@ -24,7 +24,7 @@ tasks:
     vars:
       CONTEXT: '{{default "development" .CONTEXT}}'
     cmds:
-      - kubectl create -f $HOME/povault/sealed-secrets/{{.CONTEXT}}
+      - kubectl create -f $HOME/povault/sealed-secrets/{{.CONTEXT}} || /bin/true
 
   argocd-bootstrap:
     desc: Helm "bootstrap" install of argocd
