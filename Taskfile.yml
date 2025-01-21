@@ -18,3 +18,10 @@ tasks:
       - helm repo add cilium https://helm.cilium.io/
       - helm dep update examples/cilium/
       - helm install cilium examples/cilium/ -n kube-system
+
+  sealed-secrets-prereq:
+    desc: Install sealed-secrets secret in given CONTEXT (default "development")
+    vars:
+      CONTEXT: '{{default "development" .CONTEXT}}'
+    cmds:
+      - kubectl create -f $HOME/povault/sealed-secrets/{{.CONTEXT}}
