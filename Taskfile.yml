@@ -25,3 +25,12 @@ tasks:
       CONTEXT: '{{default "development" .CONTEXT}}'
     cmds:
       - kubectl create -f $HOME/povault/sealed-secrets/{{.CONTEXT}}
+
+  argocd-bootstrap:
+    desc: Helm "bootstrap" install of argocd
+    deps:
+      - sealed-secrets-prereq
+    cmds:
+      - helm repo add argo-helm https://argoproj.github.io/argo-helm
+      - helm dep update bootstrap/argocd/
+      - helm install argocd bootstrap/argocd/ -n argocd --create-namespace
