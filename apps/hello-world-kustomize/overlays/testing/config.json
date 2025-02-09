@@ -1,0 +1,11 @@
+{
+  "appName": "hello-world-kustomize",
+  "userGivenName": "hello-world-kustomize",
+  "destNamespace": "default",
+  "destServer": "https://kubernetes.default.svc",
+  "srcPath": "apps/hello-world-kustomize/overlays/testing",
+  "srcRepoURL": "https://github.com/kingphil/argocd-autopilot-draft.git",
+  "srcTargetRevision": "",
+  "labels": null,
+  "annotations": null
+}
