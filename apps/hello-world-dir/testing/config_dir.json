@@ -1,0 +1,13 @@
+{
+  "appName": "hello-world-dir",
+  "userGivenName": "hello-world-dir",
+  "destNamespace": "default",
+  "destServer": "https://kubernetes.default.svc",
+  "srcPath": "examples/demo-app/",
+  "srcRepoURL": "https://github.com/argoproj-labs/argocd-autopilot.git",
+  "srcTargetRevision": "",
+  "labels": null,
+  "annotations": null,
+  "exclude": "",
+  "include": ""
+}
