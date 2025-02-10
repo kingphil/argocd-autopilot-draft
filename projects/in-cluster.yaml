@@ -6,13 +6,13 @@ metadata:
     argocd.argoproj.io/sync-options: PruneLast=true
     argocd.argoproj.io/sync-wave: "-2"
   creationTimestamp: null
-  name: testing
+  name: in-cluster
   namespace: argocd
 spec:
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
-  description: testing project
+  description: in-cluster project
   destinations:
   - namespace: '*'
     server: '*'
@@ -30,13 +30,13 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
   creationTimestamp: null
-  name: testing
+  name: in-cluster
   namespace: argocd
 spec:
   generators:
   - git:
       files:
-      - path: apps/**/testing/config.json
+      - path: apps/**/in-cluster/config.json
       repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
       requeueAfterSeconds: 20
       revision: ""
@@ -47,7 +47,7 @@ spec:
           project: ""
   - git:
       files:
-      - path: apps/**/testing/config_dir.json
+      - path: apps/**/in-cluster/config_dir.json
       repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
       requeueAfterSeconds: 20
       revision: ""
@@ -69,7 +69,7 @@ spec:
       labels:
         app.kubernetes.io/managed-by: argocd-autopilot
         app.kubernetes.io/name: '{{ appName }}'
-      name: testing-{{ userGivenName }}
+      name: in-cluster-{{ userGivenName }}
       namespace: argocd
     spec:
       destination:
@@ -80,7 +80,7 @@ spec:
         jsonPointers:
         - /status
         kind: Application
-      project: testing
+      project: in-cluster
       source:
         path: '{{ srcPath }}'
         repoURL: '{{ srcRepoURL }}'
