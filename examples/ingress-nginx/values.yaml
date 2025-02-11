@@ -7,14 +7,18 @@ ingress-nginx:
     replicaCount: 1
 
     service:
-      enabled: true
-      type: LoadBalancer
-      annotations:
-        external-dns.alpha.kubernetes.io/hostname: "ingress.staging.pekware.club"
+      enabled: false
 
     extraArgs:
       default-ssl-certificate: "kube-system/star.development.pekware.club"
 
-    hostNetwork: false
+    hostNetwork: true
     hostPort:
       enabled: false
+
+    nodeSelector:
+      ingress-ready: "true"
+    tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
+      effect: NoSchedule
