@@ -3,7 +3,7 @@
   "userGivenName": "hello-world",
   "destNamespace": "default",
   "destServer": "https://kubernetes.default.svc",
-  "srcPath": "apps/hello-world/overlays/in-cluster",
+  "srcPath": "apps/hello-world/overlays/development",
   "srcRepoURL": "https://github.com/kingphil/argocd-autopilot-draft.git",
   "srcTargetRevision": "",
   "labels": null,
