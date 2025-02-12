@@ -1,0 +1,4 @@
+{
+  "name": "staging",
+  "server": "https://staging:6443"
+}
