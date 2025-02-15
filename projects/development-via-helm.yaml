@@ -87,6 +87,7 @@ spec:
         targetRevision: '{{ srcTargetRevision }}'
         helm:
           valueFiles:
+          - values.yaml
           - development-via-helm/values.yaml
       syncPolicy:
         automated:
