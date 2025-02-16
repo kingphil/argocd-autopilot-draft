@@ -19,18 +19,21 @@ tasks:
       - helm dep update examples/cilium/
       - helm install --wait cilium examples/cilium/ -n kube-system
 
-  sealed-secrets-prereq:
-    desc: Install sealed-secrets secret in given CONTEXT (default "development")
+  secrets-prereq:
+    desc: Install secrets in given CONTEXT (default "development")
     vars:
       CONTEXT: '{{default "development" .CONTEXT}}'
     cmds:
-      - kubectl create -f $HOME/povault/sealed-secrets/{{.CONTEXT}} || /bin/true
+      - kubectl create -f $HOME/povault/k8s-secrets/{{.CONTEXT}} || /bin/true
 
   argocd-bootstrap:
     desc: Helm "bootstrap" install of argocd
+    vars:
+      CONTEXT: '{{default "development" .CONTEXT}}'
     deps:
-      - sealed-secrets-prereq
+      - secrets-prereq
     cmds:
       - helm repo add argo-helm https://argoproj.github.io/argo-helm
       - helm dep update bootstrap/argocd/
       - helm install --wait argocd bootstrap/argocd/ -n argocd --create-namespace
+      - kubectl create -f $HOME/povault/k8s-secrets/{{.CONTEXT}}/post-argocd/ || /bin/true
