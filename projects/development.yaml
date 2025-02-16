@@ -57,11 +57,6 @@ spec:
       destination:
         namespace: '{{ destNamespace }}'
         server: '{{ destServer }}'
-      ignoreDifferences:
-      - group: argoproj.io
-        jsonPointers:
-        - /status
-        kind: Application
       project: development
       source:
         path: '{{ srcPath }}'
@@ -80,4 +75,3 @@ spec:
           selfHeal: true
         syncOptions:
         - CreateNamespace=true
-status: {}
