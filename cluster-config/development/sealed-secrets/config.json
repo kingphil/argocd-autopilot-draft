@@ -1,0 +1,11 @@
+{
+  "appName": "sealed-secrets",
+  "userGivenName": "sealed-secrets",
+  "destNamespace": "sealed-secrets",
+  "destServer": "https://kubernetes.default.svc",
+  "srcPath": "apps/sealed-secrets/",
+  "srcRepoURL": "https://github.com/kingphil/argocd-autopilot-draft.git",
+  "srcTargetRevision": "",
+  "labels": null,
+  "annotations": null
+}
