@@ -94,4 +94,7 @@ spec:
           allowEmpty: true
           prune: true
           selfHeal: true
+        ## note: did not on podinfo (namespace was created); leaving here until I see in action
+        syncOptions:
+        - CreateNamespace=false
 status: {}
