@@ -6,13 +6,13 @@ metadata:
     argocd.argoproj.io/sync-options: PruneLast=true
     argocd.argoproj.io/sync-wave: "-2"
   creationTimestamp: null
-  name: grok
+  name: development
   namespace: argocd
 spec:
   clusterResourceWhitelist:
   - group: '*'
     kind: '*'
-  description: grok project
+  description: development project
   destinations:
   - namespace: '*'
     server: '*'
@@ -30,13 +30,13 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
   creationTimestamp: null
-  name: grok
+  name: development
   namespace: argocd
 spec:
   generators:
   - git:
       files:
-      - path: cluster-config/grok/**/config.json
+      - path: cluster-config/development/**/config.json
       repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
       requeueAfterSeconds: 20
       revision: ""
@@ -51,7 +51,7 @@ spec:
       labels:
         app.kubernetes.io/managed-by: argocd-autopilot
         app.kubernetes.io/name: '{{ appName }}'
-      name: grok-{{ userGivenName }}
+      name: development-{{ userGivenName }}
       namespace: argocd
     spec:
       destination:
@@ -62,7 +62,7 @@ spec:
         jsonPointers:
         - /status
         kind: Application
-      project: grok
+      project: development
       source:
         path: '{{ srcPath }}'
         repoURL: '{{ srcRepoURL }}'
