@@ -5,6 +5,8 @@ ingress-nginx:
 
     kind: Deployment
     replicaCount: 1
+    updateStrategy:
+      type: Recreate
 
     service:
       enabled: false
