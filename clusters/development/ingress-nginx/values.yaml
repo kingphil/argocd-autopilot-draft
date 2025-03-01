@@ -10,7 +10,7 @@ ingress-nginx:
       enabled: false
 
     extraArgs:
-      default-ssl-certificate: "kube-system/star.staging.pekware.club"
+      default-ssl-certificate: "kube-system/star.pekware.club"
 
     hostNetwork: true
     hostPort:
