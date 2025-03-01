@@ -1,0 +1,11 @@
+ingress-nginx:
+  controller:
+    ingressClassResource:
+      default: true
+    extraArgs:
+      default-ssl-certificate: "cert-manager/acme-prod.star.staging.pekware.club"
+    replicaCount: 2
+    service:
+      enabled: true
+      annotations:
+        external-dns.alpha.kubernetes.io/hostname: "ingress.staging.pekware.club"

@@ -1,0 +1,6 @@
+appName: ingress-nginx
+userGivenName: ingress-nginx
+destNamespace: ingress-nginx
+srcPath: apps/ingress-nginx
+srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+srcTargetRevision: main
