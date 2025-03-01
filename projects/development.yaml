@@ -33,6 +33,8 @@ metadata:
   name: development
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
   - git:
       files:
@@ -44,23 +46,23 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/managed-by: argocd-autopilot
-        app.kubernetes.io/name: '{{ appName }}'
-      name: development-{{ userGivenName }}
+        app.kubernetes.io/name: '{{ .appName }}'
+      name: development-{{ .userGivenName }}
       namespace: argocd
     spec:
       destination:
-        namespace: '{{ destNamespace }}'
-        server: '{{ destServer }}'
+        namespace: '{{ .destNamespace }}'
+        server: '{{ .destServer }}'
       project: development
       source:
-        path: '{{ srcPath }}'
-        repoURL: '{{ srcRepoURL }}'
-        targetRevision: '{{ srcTargetRevision }}'
+        path: '{{ .srcPath }}'
+        repoURL: '{{ .srcRepoURL }}'
+        targetRevision: '{{ .srcTargetRevision }}'
         helm:
           valueFiles:
           - values.yaml
           ## note the prepended slash, as this is not relative to source.path above
-          - /{{ path }}/values.yaml
+          - /{{ .path.path }}/values.yaml
           ignoreMissingValueFiles: false
       syncPolicy:
         automated:
