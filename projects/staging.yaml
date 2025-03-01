@@ -49,7 +49,7 @@ spec:
     spec:
       destination:
         namespace: '{{ .destNamespace }}'
-        server: '{{ .destServer }}'
+        server: https://staging:6443
       project: staging
       source:
         path: '{{ .srcPath }}'
@@ -60,7 +60,7 @@ spec:
           - values.yaml
           ## note the prepended slash, as this is not relative to source.path above
           - /{{ .path.path }}/values.yaml
-          ignoreMissingValueFiles: false
+          ignoreMissingValueFiles: true
       syncPolicy:
         automated:
           allowEmpty: true
