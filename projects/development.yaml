@@ -36,7 +36,7 @@ spec:
   generators:
   - git:
       files:
-      - path: cluster-config/development/**/config.json
+      - path: clusters/development/**/config.json
       repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
       requeueAfterSeconds: 20
       revision: ""
@@ -47,7 +47,7 @@ spec:
           project: ""
   - git:
       files:
-      - path: cluster-config/development/**/config.yaml
+      - path: clusters/development/**/config.yaml
       repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
       revision: ""
   syncPolicy: {}
