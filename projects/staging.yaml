@@ -49,7 +49,7 @@ spec:
     spec:
       destination:
         namespace: '{{ .destNamespace }}'
-        server: https://staging:6443
+        name: staging
       project: staging
       source:
         path: '{{ .srcPath }}'
