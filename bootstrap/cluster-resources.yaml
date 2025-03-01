@@ -7,6 +7,8 @@ metadata:
   name: cluster-resources
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
   generators:
   - git:
       files:
@@ -25,15 +27,15 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/managed-by: argocd-autopilot
-        app.kubernetes.io/name: cluster-resources-{{name}}
-      name: cluster-resources-{{name}}
+        app.kubernetes.io/name: cluster-resources-{{ .name }}
+      name: cluster-resources-{{ .name }}
       namespace: argocd
     spec:
       destination:
-        server: '{{server}}'
+        server: '{{ .server }}'
       project: default
       source:
-        path: bootstrap/cluster-resources/{{name}}
+        path: bootstrap/cluster-resources/{{ .name }}
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
       syncPolicy:
         automated:
