@@ -45,6 +45,11 @@ spec:
         spec:
           destination: {}
           project: ""
+  - git:
+      files:
+      - path: cluster-config/development/**/config.yaml
+      repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+      revision: ""
   syncPolicy: {}
   template:
     metadata:

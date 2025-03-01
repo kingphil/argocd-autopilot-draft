@@ -1,0 +1,7 @@
+appName: podinfo
+userGivenName: podinfo
+destNamespace: podinfo
+destServer: https://kubernetes.default.svc
+srcPath: apps/podinfo
+srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+srcTargetRevision: main
