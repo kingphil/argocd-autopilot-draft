@@ -34,11 +34,11 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - git:
-      files:
-      - path: clusters/experimental/**/config.yaml
-      repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
-      revision: main
+    - git:
+        repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+        revision: main
+        files:
+          - path: clusters/experimental/**/config.yaml
   syncPolicy:
     preserveResourcesOnDeletion: false
   template:
@@ -48,20 +48,20 @@ spec:
       name: experimental-{{ .userGivenName }}
       namespace: argocd
     spec:
-      destination:
-        namespace: '{{ .destNamespace }}'
-        server: '{{ .destServer }}'
-      project: experimental
       source:
-        path: '{{ .srcPath }}'
         repoURL: '{{ .srcRepoURL }}'
         targetRevision: '{{ .srcTargetRevision }}'
+        path: '{{ .srcPath }}'
         helm:
           valueFiles:
           - values.yaml
           ## note the prepended slash, as this is not relative to source.path above
           - /{{ .path.path }}/values.yaml
           ignoreMissingValueFiles: false
+      destination:
+        namespace: '{{ .destNamespace }}'
+        server: '{{ .destServer }}'
+      project: experimental
       syncPolicy:
         automated:
           allowEmpty: true
