@@ -40,7 +40,7 @@ spec:
       repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
       revision: main
   syncPolicy:
-    preserveResourcesOnDeletion: true
+    preserveResourcesOnDeletion: false
   template:
     metadata:
       labels:
