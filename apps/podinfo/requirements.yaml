@@ -1,0 +1,5 @@
+dependencies:
+## https://artifacthub.io/packages/helm/podinfo/podinfo
+- name: podinfo
+  version: 6.7.x
+  repository: https://stefanprodan.github.io/podinfo
