@@ -7,6 +7,9 @@ metadata:
   name: experimental-infra
   namespace: argocd
 spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
   generators:
     - git:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
@@ -15,20 +18,20 @@ spec:
           - path: clusters/experimental/**/config_dir.yaml
   template:
     metadata:
-      name: experimental-infra-{{ userGivenName }}
+      name: experimental-infra-{{ .userGivenName }}
       namespace: argocd
     spec:
       source:
-        repoURL: '{{ srcRepoURL }}'
-        targetRevision: '{{ srcTargetRevision }}'
-        path: '{{ path }}'
+        repoURL: '{{ .srcRepoURL }}'
+        targetRevision: '{{ .srcTargetRevision }}'
+        path: '{{ .path.path }}'
         directory:
           recurse: true
-          exclude: '{{ path.filename }}'
+          exclude: '{{ .path.filename }}'
           include: '*.yaml'
       destination:
-        namespace: '{{ destNamespace }}'
-        server: '{{ destServer }}'
+        namespace: '{{ .destNamespace }}'
+        server: '{{ .destServer }}'
       project: experimental
       syncPolicy:
         automated:
