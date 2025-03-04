@@ -1,0 +1,7 @@
+appName: ingress-nginx-infra
+userGivenName: ingress-nginx-infra
+destNamespace: ingress-nginx
+destServer: https://kubernetes.default.svc
+#srcPath: apps/ingress-nginx
+srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+srcTargetRevision: main
