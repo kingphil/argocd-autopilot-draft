@@ -35,11 +35,11 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  - git:
-      files:
-      - path: clusters/development/**/config.yaml
-      repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
-      revision: ""
+    - git:
+        repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+        revision: main
+        files:
+          - path: clusters/development/**/config.yaml
   syncPolicy: {}
   template:
     metadata:
