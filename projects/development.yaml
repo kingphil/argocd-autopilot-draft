@@ -54,6 +54,23 @@ spec:
                   ## note the prepended slash, as this is not relative to source.path above
                   - /{{ .path.path }}/values.yaml
                 ignoreMissingValueFiles: false
+    - git:
+        repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+        revision: main
+        files:
+          - path: clusters/development/**/config_dir.yaml
+        template:
+          metadata: {}  ## required
+          spec:
+            destination: {}  ## required
+            project: ""  ## required
+            source:
+              repoURL: ""  ## required
+              path: '{{ .path.path }}'
+              directory:
+                recurse: true
+                exclude: '{{ .path.filename }}'
+                include: '*.yaml'
   syncPolicy: {}
   template:
     metadata:
