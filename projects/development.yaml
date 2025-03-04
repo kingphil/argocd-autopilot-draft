@@ -40,6 +40,20 @@ spec:
         revision: main
         files:
           - path: clusters/development/**/config.yaml
+        template:
+          metadata: {}  ## required
+          spec:
+            destination: {}  ## required
+            project: ""  ## required
+            source:
+              repoURL: ""  ## required
+              path: '{{ .srcPath }}'
+              helm:
+                valueFiles:
+                  - values.yaml
+                  ## note the prepended slash, as this is not relative to source.path above
+                  - /{{ .path.path }}/values.yaml
+                ignoreMissingValueFiles: false
   syncPolicy: {}
   template:
     metadata:
