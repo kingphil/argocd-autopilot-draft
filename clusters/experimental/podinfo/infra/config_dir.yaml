@@ -1,5 +1,5 @@
-appName: podinfo-infra
-userGivenName: podinfo-infra
+appName: podinfo
+userGivenName: podinfo
 destNamespace: podinfo
 destServer: https://kubernetes.default.svc
 srcPath: apps/podinfo
