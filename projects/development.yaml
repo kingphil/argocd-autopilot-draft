@@ -79,20 +79,13 @@ spec:
       name: development-{{ .userGivenName }}
       namespace: argocd
     spec:
+      source:
+        repoURL: '{{ .srcRepoURL }}'
+        targetRevision: '{{ .srcTargetRevision }}'
       destination:
         namespace: '{{ .destNamespace }}'
         server: '{{ .destServer }}'
       project: development
-      source:
-        path: '{{ .srcPath }}'
-        repoURL: '{{ .srcRepoURL }}'
-        targetRevision: '{{ .srcTargetRevision }}'
-        helm:
-          valueFiles:
-          - values.yaml
-          ## note the prepended slash, as this is not relative to source.path above
-          - /{{ .path.path }}/values.yaml
-          ignoreMissingValueFiles: false
       syncPolicy:
         automated:
           allowEmpty: true
