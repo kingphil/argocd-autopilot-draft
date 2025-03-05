@@ -10,7 +10,6 @@ spec:
   goTemplate: true
   goTemplateOptions: ["missingkey=error"]
   generators:
-  generators:
     - git:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         revision: main
@@ -23,8 +22,8 @@ spec:
     spec:
       source:
         repoURL: '{{ .srcRepoURL }}'
-        targetRevision: '{{ .srcTargetRevision }}'
         path: '{{ .path.path }}'
+        targetRevision: '{{ .srcTargetRevision }}'
         directory:
           recurse: true
           exclude: '{{ .path.filename }}'

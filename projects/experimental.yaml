@@ -27,7 +27,6 @@ kind: ApplicationSet
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
-  creationTimestamp: null
   name: experimental
   namespace: argocd
 spec:
@@ -39,25 +38,21 @@ spec:
         revision: main
         files:
           - path: clusters/experimental/**/config.yaml
-  syncPolicy:
-    preserveResourcesOnDeletion: false
   template:
     metadata:
-      labels:
-        app.kubernetes.io/name: '{{ .appName }}'
       name: experimental-{{ .userGivenName }}
       namespace: argocd
     spec:
       source:
         repoURL: '{{ .srcRepoURL }}'
-        targetRevision: '{{ .srcTargetRevision }}'
         path: '{{ .srcPath }}'
+        targetRevision: '{{ .srcTargetRevision }}'
         helm:
           valueFiles:
-          - values.yaml
-          ## note the prepended slash, as this is not relative to source.path above
-          - /{{ .path.path }}/values.yaml
-          ignoreMissingValueFiles: false
+            - values.yaml
+            ## note the prepended slash, as this is not relative to source.path above
+            - /{{ .path.path }}/values.yaml
+          ignoreMissingValueFiles: true
       destination:
         namespace: '{{ .destNamespace }}'
         server: '{{ .destServer }}'
@@ -67,5 +62,3 @@ spec:
           allowEmpty: true
           prune: true
           selfHeal: true
-        syncOptions:
-        - CreateNamespace=true
