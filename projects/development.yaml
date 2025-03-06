@@ -81,7 +81,7 @@ spec:
     spec:
       source:
         repoURL: '{{ .srcRepoURL }}'
-        targetRevision: '{{ .srcTargetRevision }}'
+        targetRevision: development
       destination:
         namespace: '{{ .destNamespace }}'
         server: '{{ .destServer }}'
