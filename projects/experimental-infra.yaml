@@ -17,7 +17,7 @@ spec:
           - path: clusters/experimental/**/config_dir.yaml
   template:
     metadata:
-      name: experimental-infra-{{ .userGivenName }}
+      name: experimental-{{ .userGivenName }}-infra
       namespace: argocd
     spec:
       source:
