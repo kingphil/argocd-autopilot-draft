@@ -1,0 +1,7 @@
+name: cert-manager
+version: 0.1.0
+dependencies:
+## https://artifacthub.io/packages/helm/cert-manager/cert-manager
+- name: cert-manager
+  version: 1.x
+  repository: https://charts.jetstack.io
