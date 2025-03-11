@@ -37,7 +37,7 @@ spec:
   generators:
     - git:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
-        revision: development
+        revision: main
         files:
           - path: clusters/development/**/config.yaml
         template:
@@ -56,7 +56,7 @@ spec:
                 ignoreMissingValueFiles: false
     - git:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
-        revision: development
+        revision: main
         files:
           - path: clusters/development/**/config_dir.yaml
         template:
@@ -81,7 +81,7 @@ spec:
     spec:
       source:
         repoURL: '{{ .srcRepoURL }}'
-        targetRevision: development
+        targetRevision: main
       destination:
         namespace: '{{ .destNamespace }}'
         server: '{{ .destServer }}'
