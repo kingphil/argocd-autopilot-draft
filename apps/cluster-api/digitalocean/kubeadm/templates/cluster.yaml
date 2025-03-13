@@ -2,7 +2,7 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
-  name: "${CLUSTER_NAME}"
+  name: "{{ .Values.cluster_name }}"
 spec:
   clusterNetwork:
     pods:
@@ -10,30 +10,30 @@ spec:
   infrastructureRef:
     apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
     kind: DOCluster
-    name: "${CLUSTER_NAME}"
+    name: "{{ .Values.cluster_name }}"
   controlPlaneRef:
     kind: KubeadmControlPlane
     apiVersion: controlplane.cluster.x-k8s.io/v1beta1
-    name: "${CLUSTER_NAME}-control-plane"
+    name: "{{ .Values.cluster_name }}-control-plane"
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: DOCluster
 metadata:
-  name: "${CLUSTER_NAME}"
+  name: "{{ .Values.cluster_name }}"
 spec:
-  region: ${DO_REGION}
+  region: {{ .Values.region }}
 ---
 kind: KubeadmControlPlane
 apiVersion: controlplane.cluster.x-k8s.io/v1beta1
 metadata:
-  name: "${CLUSTER_NAME}-control-plane"
+  name: "{{ .Values.cluster_name }}-control-plane"
 spec:
-  replicas: ${CONTROL_PLANE_MACHINE_COUNT}
+  replicas: {{ .Values.control_plane_machine_count }}
   machineTemplate:
     infrastructureRef:
       kind: DOMachineTemplate
       apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
-      name: "${CLUSTER_NAME}-control-plane"
+      name: "{{ .Values.cluster_name }}-control-plane"
   kubeadmConfigSpec:
     initConfiguration:
       nodeRegistration:
@@ -46,59 +46,59 @@ spec:
         kubeletExtraArgs:
           cloud-provider: external
         name: '{{ ds.meta_data["local_hostname"] }}'
-  version: "${KUBERNETES_VERSION}"
+  version: "{{ .Values.kubernetes_version }}"
 ---
 kind: DOMachineTemplate
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 metadata:
-  name: "${CLUSTER_NAME}-control-plane"
+  name: "{{ .Values.cluster_name }}-control-plane"
 spec:
   template:
     spec:
-      size: "${DO_CONTROL_PLANE_MACHINE_TYPE}"
-      image: ${DO_CONTROL_PLANE_MACHINE_IMAGE}
+      size: "{{ .Values.control_plane_machine_type }}"
+      image: {{ .Values.control_plane_machine_image }}
       sshKeys:
-        - ${DO_SSH_KEY_FINGERPRINT}
+        - {{ .Values.ssh_key_fingerprint }}
 ---
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachineDeployment
 metadata:
-  name: "${CLUSTER_NAME}-md-0"
+  name: "{{ .Values.cluster_name }}-md-0"
 spec:
-  clusterName: "${CLUSTER_NAME}"
-  replicas: ${WORKER_MACHINE_COUNT}
+  clusterName: "{{ .Values.cluster_name }}"
+  replicas: {{ .Values.worker_machine_count }}
   selector:
     matchLabels:
   template:
     spec:
-      clusterName: "${CLUSTER_NAME}"
-      version: "${KUBERNETES_VERSION}"
+      clusterName: "{{ .Values.cluster_name }}"
+      version: "{{ .Values.kubernetes_version }}"
       bootstrap:
         configRef:
-          name: "${CLUSTER_NAME}-md-0"
+          name: "{{ .Values.cluster_name }}-md-0"
           apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
           kind: KubeadmConfigTemplate
       infrastructureRef:
-        name: "${CLUSTER_NAME}-md-0"
+        name: "{{ .Values.cluster_name }}-md-0"
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
         kind: DOMachineTemplate
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta1
 kind: DOMachineTemplate
 metadata:
-  name: "${CLUSTER_NAME}-md-0"
+  name: "{{ .Values.cluster_name }}-md-0"
 spec:
   template:
     spec:
-      size: "${DO_NODE_MACHINE_TYPE}"
-      image: ${DO_NODE_MACHINE_IMAGE}
+      size: "{{ .Values.worker_machine_type }}"
+      image: {{ .Values.worker_machine_image }}
       sshKeys:
-        - ${DO_SSH_KEY_FINGERPRINT}
+        - {{ .Values.ssh_key_fingerprint }}
 ---
 apiVersion: bootstrap.cluster.x-k8s.io/v1beta1
 kind: KubeadmConfigTemplate
 metadata:
-  name: "${CLUSTER_NAME}-md-0"
+  name: "{{ .Values.cluster_name }}-md-0"
 spec:
   template:
     spec:
