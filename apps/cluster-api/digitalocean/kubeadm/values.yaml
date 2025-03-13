@@ -12,3 +12,8 @@ worker_machine_count: 1
 worker_machine_type: s-2vcpu-2gb
 
 ssh_key_fingerprint: "24:85:01:a1:3b:87:10:8e:69:f3:30:ce:8a:f3:89:ec"
+
+## for quoting reasons; only override these if you know what you are doing
+instance_id: '{{ ds.meta_data["instance_id"] }}'
+local_hostname_dict: '{{ ds.meta_data["local_hostname"] }}'
+local_hostname_attr: '{{ ds.meta_data.local_hostname }}'

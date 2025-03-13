@@ -39,13 +39,13 @@ spec:
       nodeRegistration:
         kubeletExtraArgs:
           cloud-provider: external
-          provider-id: digitalocean://'{{ ds.meta_data["instance_id"] }}'
-        name: '{{ ds.meta_data["local_hostname"] }}'
+          provider-id: digitalocean://'{{ .Values.instance_id }}'
+        name: '{{ .Values.local_hostname_dict }}'
     joinConfiguration:
       nodeRegistration:
         kubeletExtraArgs:
           cloud-provider: external
-        name: '{{ ds.meta_data["local_hostname"] }}'
+        name: '{{ .Values.local_hostname_dict }}'
   version: "{{ .Values.kubernetes_version }}"
 ---
 kind: DOMachineTemplate
@@ -104,6 +104,6 @@ spec:
     spec:
       joinConfiguration:
         nodeRegistration:
-          name: '{{ ds.meta_data.local_hostname }}'
+          name: '{{ .Values.local_hostname_attr }}'
           kubeletExtraArgs:
             cloud-provider: external
