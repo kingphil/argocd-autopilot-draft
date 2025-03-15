@@ -1,5 +1,3 @@
-annotations:
-  best-cat: winsty-baggs
-
-customLabels:
-  worst-cat: dottie-baggs
+kube-state-metrics:
+  customLabels:
+    best-cat: winsty-baggs

@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: simple
+spec:
+  rules:
+  - host: kube-state-metrics.development.pekware.club
+    http:
+      paths:
+      - backend:
+          service:
+            name: my-kube-state-metrics
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - kube-state-metrics.development.pekware.club
