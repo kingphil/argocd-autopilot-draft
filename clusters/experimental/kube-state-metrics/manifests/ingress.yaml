@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: simple
 spec:
+  ingressClassName: nginx
   rules:
   - host: kube-state-metrics.development.pekware.club
     http:
