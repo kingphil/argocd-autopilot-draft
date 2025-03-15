@@ -1,27 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  creationTimestamp: null
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+  - resources-finalizer.argocd.argoproj.io/foreground
   labels:
-    app.kubernetes.io/managed-by: argocd-autopilot
     app.kubernetes.io/name: root
   name: root
   namespace: argocd
 spec:
-  destination:
-    namespace: argocd
-    server: https://kubernetes.default.svc
-  ignoreDifferences:
-  - group: argoproj.io
-    jsonPointers:
-    - /status
-    kind: Application
-  project: default
   source:
     path: projects
     repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: default
   syncPolicy:
     automated:
       allowEmpty: true
