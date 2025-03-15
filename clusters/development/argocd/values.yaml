@@ -4,7 +4,7 @@ argo-cd:
   configs:
     cm:
       timeout.reconciliation: 10s  ## DEVEL
-      kustomize.buildOptions: --enable-helm
+      kustomize.buildOptions: "--enable-helm --load-restrictor=LoadRestrictionsNone"
     ## https://artifacthub.io/packages/helm/argo/argo-cd#ssl-termination-at-ingress-controller
     params:
       server.insecure: true
