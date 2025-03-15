@@ -1,9 +1,0 @@
-podinfo:
-  ingress:
-    enabled: true
-    className: nginx
-    hosts:
-    - host: podinfo.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
