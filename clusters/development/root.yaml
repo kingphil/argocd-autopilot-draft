@@ -9,7 +9,7 @@ metadata:
   namespace: argocd
 spec:
   source:
-    path: projects
+    path: clusters/development/cluster-resources/
     repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
   destination:
     namespace: argocd
