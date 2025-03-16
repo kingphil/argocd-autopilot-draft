@@ -4,7 +4,7 @@ kind: ApplicationSet
 metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
-  name: development-helm-plus
+  name: development-hplus
   namespace: argocd
 spec:
   goTemplate: true
@@ -17,7 +17,7 @@ spec:
           - path: clusters/development/**/config-helm+.yaml
   template:
     metadata:
-      name: development-{{ .userGivenName }}
+      name: development-hplus-{{ .userGivenName }}
       namespace: argocd
     spec:
       sources:
