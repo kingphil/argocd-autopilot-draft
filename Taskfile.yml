@@ -29,7 +29,7 @@ tasks:
       - helm install --wait {{.CONTEXT}}-argocd apps/argocd/ -n argocd --create-namespace
           --values apps/argocd/values.yaml --values clusters/{{.CONTEXT}}/argocd/values.yaml
       - kubectl create -f $HOME/povault/k8s-secrets/{{.CONTEXT}} || /bin/true
-      - kubectl create -f bootstrap/
+      - kubectl create -f clusters/{{.CONTEXT}}/
 
   kind-install:
     desc: Install kind
