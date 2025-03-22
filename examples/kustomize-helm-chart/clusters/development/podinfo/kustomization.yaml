@@ -1,0 +1,19 @@
+# kustomization.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# https://kubectl.docs.kubernetes.io/references/kustomize/builtins/#_helmchartinflationgenerator_
+helmCharts:
+- releaseName: my-podinfo
+  repo: https://stefanprodan.github.io/podinfo
+  name: podinfo
+  # namespace either needs to be here, or in App's spec.source.kustomize.namespace; otherwise lands in argocd
+  #namespace: podinfo
+  version: 6.x
+  valuesFile: ../../../apps/podinfo/values.yaml
+  additionalValuesFiles:
+  - values.yaml
+
+resources:
+- ../../../apps/podinfo/
+- pod.yaml

@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kustomize-helm-chart
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  destination:
+    namespace: podinfo
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+    targetRevision: development
+    path: examples/kustomize-helm-chart/clusters/development/podinfo/
+    kustomize:
+      namespace: podinfo
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    managedNamespaceMetadata:
+      ## so the deletion of the App also removes the namespace it creates
+      ## https://github.com/argoproj/argo-cd/issues/7875
+      labels:
+        argocd.argoproj.io/instance: kustomize-helm-chart
+    syncOptions:
+      ## refers to spec.destination.namespace
+      - CreateNamespace=true

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pek
+  name: pek
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pek
+  template:
+    metadata:
+      labels:
+        app: pek
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
