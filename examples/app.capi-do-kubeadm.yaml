@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: capi-do-kubeadm
+  namespace: argocd
+  finalizers:
+    ## needed for clean deletion of DigitalOcean resources
+    - resources-finalizer.argocd.argoproj.io/background
+spec:
+  destination:
+    namespace: development
+    server: https://kubernetes.default.svc
+  project: development
+  source:
+    helm:
+      ignoreMissingValueFiles: false
+      valueFiles:
+        - values.yaml
+        - /clusters/development/capi-do-kubeadm/values.yaml
+    path: apps/cluster-api/digitalocean/kubeadm/
+    repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+    targetRevision: development
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
+    managedNamespaceMetadata:
+      ## so the deletion of the App also removes the namespace it creates
+      ## https://github.com/argoproj/argo-cd/issues/7875
+      labels:
+        argocd.argoproj.io/instance: devel-app
+    syncOptions:
+      ## refers to spec.destination.namespace
+      - CreateNamespace=true
