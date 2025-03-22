@@ -3,6 +3,7 @@ cluster_name: pek-20250313
 
 # 180665624: "Cluster API Kubernetes v1.31.4 on Ubuntu 24.04"
 control_plane_machine_image: 180665624
+control_plane_machine_count: 1
 
 worker_machine_image: 180665624
 worker_machine_count: 2
