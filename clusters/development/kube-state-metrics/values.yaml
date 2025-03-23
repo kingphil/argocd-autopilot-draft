@@ -1,2 +1,2 @@
 kube-state-metrics:
-  replicas: 4
+  replicas: 1
