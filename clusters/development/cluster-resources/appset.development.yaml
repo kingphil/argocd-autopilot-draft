@@ -27,7 +27,7 @@ spec:
                 valueFiles:
                   - values.yaml  ## global values file beside the relevant Chart.yaml
                   - /{{ .path.path }}/values.yaml  ## override values file beside the config.yaml
-                ignoreMissingValueFiles: false
+                ignoreMissingValueFiles: true
     - git:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         revision: main
