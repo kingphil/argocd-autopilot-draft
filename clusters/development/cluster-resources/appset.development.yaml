@@ -25,9 +25,8 @@ spec:
               path: '{{ .srcPath }}'
               helm:
                 valueFiles:
-                  - values.yaml
-                  ## note the prepended slash, as this is not relative to source.path above
-                  - /{{ .path.path }}/values.yaml
+                  - values.yaml  ## global values file beside the relevant Chart.yaml
+                  - /{{ .path.path }}/values.yaml  ## override values file beside the config.yaml
                 ignoreMissingValueFiles: false
     - git:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
