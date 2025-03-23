@@ -1,0 +1,6 @@
+appName: kube-state-metrics-dir
+userGivenName: kube-state-metrics-dir
+destNamespace: monitoring
+destServer: https://kubernetes.default.svc
+srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+srcTargetRevision: main
