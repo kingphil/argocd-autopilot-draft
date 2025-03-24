@@ -18,16 +18,16 @@ spec:
         template:
           metadata: {}  ## required
           spec:
-            destination: {}  ## required
-            project: ""  ## required
             source:
-              repoURL: ""  ## required
               path: '{{ .srcPath }}'
               helm:
                 valueFiles:
                   - values.yaml  ## global values file beside the relevant Chart.yaml
                   - /{{ .path.path }}/values.yaml  ## override values file beside the config.yaml
                 ignoreMissingValueFiles: true
+              repoURL: ""  ## required
+            destination: {}  ## required
+            project: ""  ## required
     - git:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         revision: main
@@ -36,15 +36,15 @@ spec:
         template:
           metadata: {}  ## required
           spec:
-            destination: {}  ## required
-            project: ""  ## required
             source:
-              repoURL: ""  ## required
               path: '{{ .path.path }}'
               directory:
                 recurse: true
                 exclude: '{{ .path.filename }}'
                 include: '*.yaml'
+              repoURL: ""  ## required
+            destination: {}  ## required
+            project: ""  ## required
   syncPolicy: {}
   template:
     metadata:
