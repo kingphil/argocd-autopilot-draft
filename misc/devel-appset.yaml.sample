@@ -1,0 +1,78 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  name: devel-appset
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+        revision: development
+        files:
+          - path: clusters/development/**/config.DEVEL.yaml
+        template:
+          metadata: {}  ## required
+          spec:
+            source:
+              path: '{{ .srcPath }}'
+              helm:
+                valueFiles:
+                  #- values.yaml  ## global values file beside the relevant Chart.yaml
+                  - /{{ .path.path }}/values.yaml  ## override values file beside the config.yaml
+                ignoreMissingValueFiles: false
+              repoURL: ""  ## required
+            destination: {}  ## required
+            project: ""  ## required
+    - git:
+        repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+        revision: development
+        files:
+          - path: clusters/development/**/config_dir.DEVEL.yaml
+        template:
+          metadata: {}  ## required
+          spec:
+            source:
+              path: '{{ .path.path }}'
+              directory:
+                recurse: true
+                exclude: '{{ .path.filename }}'
+                include: '*.yaml'
+              repoURL: ""  ## required
+            destination: {}  ## required
+            project: ""  ## required
+  syncPolicy:
+    applicationsSync: create-delete
+    preserveResourcesOnDeletion: false
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: '{{ .appName }}'
+      name: devel-appset-{{ .userGivenName }}
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io/foreground
+        #- resources-finalizer.argocd.argoproj.io/background  ## infra (e.g. capi-do)
+    spec:
+      source:
+        repoURL: '{{ .srcRepoURL }}'
+        targetRevision: development
+      destination:
+        namespace: '{{ .destNamespace }}'
+        server: '{{ .destServer }}'
+      project: development
+      syncPolicy:
+        automated:
+          allowEmpty: true
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
+        managedNamespaceMetadata:
+          ## https://github.com/argoproj/argo-cd/issues/7875
+          labels:
+            argocd.argoproj.io/instance: devel-appset-{{ .userGivenName }}
