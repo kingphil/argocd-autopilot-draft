@@ -1,0 +1,10 @@
+gha-runner-scale-set:
+  githubConfigUrl: "https://github.com/pekware"
+  githubConfigSecret: pre-defined-secret
+  minRunners: 1
+  maxRunners: 10
+  containerMode:
+    type: dind
+  # controllerServiceAccount:
+  #   namespace: arc-systems
+  #   name: development-arc-gha-rs-controller
