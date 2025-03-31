@@ -1,6 +1,6 @@
 appName: sealed-secrets
 userGivenName: sealed-secrets
-destNamespace: sealed-secrets
+destNamespace: kube-system
 destServer: https://kubernetes.default.svc
 srcPath: apps/sealed-secrets/
 srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git
