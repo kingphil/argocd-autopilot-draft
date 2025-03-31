@@ -52,6 +52,8 @@ spec:
         app.kubernetes.io/name: '{{ .appName }}'
       name: development-{{ .userGivenName }}
       namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io/foreground
     spec:
       source:
         repoURL: '{{ .srcRepoURL }}'
@@ -67,3 +69,7 @@ spec:
           selfHeal: true
         syncOptions:
         - CreateNamespace=true
+        managedNamespaceMetadata:
+          ## https://github.com/argoproj/argo-cd/issues/7875
+          labels:
+            argocd.argoproj.io/instance: devel-appset-{{ .userGivenName }}
