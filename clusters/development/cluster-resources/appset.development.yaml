@@ -28,9 +28,6 @@ spec:
               repoURL: ""  ## required
             destination: {}  ## required
             project: ""  ## required
-        values:
-          realAppName: '{{ .appName }}'
-          realUserGivenName: '{{ .userGivenName }}'
     - git:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         revision: main
@@ -48,15 +45,12 @@ spec:
               repoURL: ""  ## required
             destination: {}  ## required
             project: ""  ## required
-        values:
-          realAppName: '{{ .appName }}-dir'
-          realUserGivenName: '{{ .userGivenName }}-dir'
   syncPolicy: {}
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: '{{ .values.realAppName }}'
-      name: development-{{ .values.realUserGivenName }}
+        app.kubernetes.io/name: '{{ .appName }}'
+      name: development-{{ .userGivenName }}
       namespace: argocd
       finalizers:
         - resources-finalizer.argocd.argoproj.io/foreground
@@ -79,4 +73,4 @@ spec:
         managedNamespaceMetadata:
           ## https://github.com/argoproj/argo-cd/issues/7875
           labels:
-            argocd.argoproj.io/instance: devel-appset-{{ .values.realUserGivenName }}
+            argocd.argoproj.io/instance: devel-appset-{{ .userGivenName }}
