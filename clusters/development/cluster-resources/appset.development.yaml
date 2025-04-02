@@ -31,7 +31,7 @@ spec:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         revision: main
         files:
-          - path: clusters/development/**/config_dir.yaml
+          - path: clusters/development/**/config-dir.yaml
         template:
           metadata: {}  ## required
           spec:
