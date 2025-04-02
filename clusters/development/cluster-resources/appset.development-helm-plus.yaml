@@ -19,7 +19,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: '{{ .appName }}'
-      name: development-helm-plus-{{ .userGivenName }}
+      name: '{{ .userGivenName }}-helm-plus'
       namespace: argocd
       finalizers:
         - resources-finalizer.argocd.argoproj.io/foreground
@@ -27,7 +27,7 @@ spec:
       sources:
       - repoURL: '{{ .srcRepoURL }}'
         path: '{{ .srcPath }}'
-        targetRevision: development
+        targetRevision: main
         helm:
           valueFiles:
             - values.yaml  ## global values file beside the relevant Chart.yaml
@@ -35,7 +35,7 @@ spec:
           ignoreMissingValueFiles: true
       - repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         path: '{{ .path.path }}/manifests/'
-        targetRevision: development
+        targetRevision: main
       destination:
         namespace: '{{ .destNamespace }}'
         server: '{{ .destServer }}'

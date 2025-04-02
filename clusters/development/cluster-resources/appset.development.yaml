@@ -49,7 +49,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: '{{ .appName }}'
-      name: development-{{ .userGivenName }}
+      name: '{{ .userGivenName }}'
       namespace: argocd
       finalizers:
         - resources-finalizer.argocd.argoproj.io/foreground
