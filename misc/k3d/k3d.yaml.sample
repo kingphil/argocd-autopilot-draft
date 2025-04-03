@@ -1,0 +1,33 @@
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+servers: 1
+agents: 1
+ports:
+  - port: 443:443
+    nodeFilters:
+      - loadbalancer
+  - port: 80:80
+    nodeFilters:
+      - loadbalancer
+options:
+  kubeconfig:
+    updateDefaultKubeconfig: true
+    switchCurrentContext: true
+  k3s:
+    extraArgs:
+      - arg: --disable=traefik
+        nodeFilters:
+          - server:*
+      - arg: --flannel-backend=none
+        nodeFilters:
+          - server:*
+      - arg: --disable-network-policy
+        nodeFilters:
+          - server:*
+      - arg: --node-taint=node-role.kubernetes.io/control-plane:NoSchedule
+        nodeFilters:
+          - server:*
+      ## for public cluster
+      - arg: --tls-san=$HOSTNAME
+        nodeFilters:
+          - server:*
