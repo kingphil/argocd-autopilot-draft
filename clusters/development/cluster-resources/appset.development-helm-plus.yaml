@@ -19,7 +19,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: '{{ .appName }}'
-      name: '{{ .userGivenName }}-helm-plus'
+      name: '{{ .userGivenName }}-development-helm-plus'
       namespace: argocd
       finalizers:
         - resources-finalizer.argocd.argoproj.io/foreground
@@ -49,6 +49,7 @@ spec:
         - CreateNamespace=true
         - ServerSideApply=true
         managedNamespaceMetadata:
+          ## so the deletion of the App also removes the namespace it creates
           ## https://github.com/argoproj/argo-cd/issues/7875
           labels:
-            argocd.argoproj.io/instance: devel-appset-{{ .userGivenName }}
+            argocd.argoproj.io/instance: '{{ .userGivenName }}-development-helm-plus'
