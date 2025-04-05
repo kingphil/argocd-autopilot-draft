@@ -1,0 +1,6 @@
+appName: csi-driver-nfs
+userGivenName: csi-driver-nfs
+destNamespace: csi-driver-nfs
+destServer: https://kubernetes.default.svc
+srcPath: apps/csi-driver-nfs/
+srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git

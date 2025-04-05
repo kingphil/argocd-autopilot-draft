@@ -1,0 +1,10 @@
+# https://github.com/kubernetes-csi/csi-driver-nfs/tree/master/charts
+# helm repo add csi-driver-nfs https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
+# helm install csi-driver-nfs csi-driver-nfs/csi-driver-nfs --namespace cfs-driver-nfs --version 4.x
+name: csi-driver-nfs
+version: 0.1.0
+dependencies:
+  # https://github.com/kubernetes-csi/csi-driver-nfs/releases
+  - name: csi-driver-nfs
+    version: 4.x
+    repository: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
