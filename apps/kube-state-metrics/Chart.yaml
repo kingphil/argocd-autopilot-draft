@@ -4,7 +4,6 @@
 name: kube-state-metrics
 version: 0.1.0
 dependencies:
-  ## https://artifacthub.io/packages/helm/bitnami-labs/sealed-secrets
   - name: kube-state-metrics
     version: 5.x
     repository: https://prometheus-community.github.io/helm-charts
