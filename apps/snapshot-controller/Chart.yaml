@@ -1,0 +1,8 @@
+# https://artifacthub.io/packages/helm/piraeus-charts/snapshot-controller
+# https://github.com/piraeusdatastore/helm-charts
+name: snapshot-controller
+version: 0.1.0
+dependencies:
+  - name: snapshot-controller
+    version: 4.0.x
+    repository: https://piraeus.io/helm-charts/
