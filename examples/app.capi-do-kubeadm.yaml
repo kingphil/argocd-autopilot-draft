@@ -17,7 +17,7 @@ spec:
       valueFiles:
         - values.yaml
         - /clusters/development/capi-do-kubeadm/values.yaml
-    path: apps/cluster-api/digitalocean/kubeadm/
+    path: charts/cluster-api/digitalocean/kubeadm/
     repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
     targetRevision: development
   syncPolicy:

@@ -2,6 +2,6 @@ appName: gha-runner-scale-set-controller
 userGivenName: arc
 destNamespace: arc-systems
 destServer: https://kubernetes.default.svc
-srcPath: apps/gha-runner-scale-set-controller
+srcPath: charts/gha-runner-scale-set-controller
 srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git
 srcTargetRevision: main

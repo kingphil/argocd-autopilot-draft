@@ -2,5 +2,5 @@ appName: snapshot-controller
 userGivenName: snapshot-controller
 destNamespace: snapshot-controller
 destServer: https://kubernetes.default.svc
-srcPath: apps/snapshot-controller/
+srcPath: charts/snapshot-controller/
 srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git

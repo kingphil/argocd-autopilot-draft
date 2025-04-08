@@ -1,6 +1,6 @@
 appName: podinfo
 userGivenName: podinfo
 destNamespace: podinfo
-srcPath: apps/podinfo
+srcPath: charts/podinfo
 srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git
 srcTargetRevision: main

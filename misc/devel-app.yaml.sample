@@ -16,7 +16,7 @@ spec:
       valueFiles:
         - values.yaml
         - /clusters/development/APPNAME/values.yaml
-    path: apps/APPNAME/
+    path: charts/APPNAME/
     repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
     targetRevision: development
   syncPolicy:

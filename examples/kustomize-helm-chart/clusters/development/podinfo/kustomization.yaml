@@ -10,10 +10,10 @@ helmCharts:
   # namespace either needs to be here, or in App's spec.source.kustomize.namespace; otherwise lands in argocd
   #namespace: podinfo
   version: 6.x
-  valuesFile: ../../../apps/podinfo/values.yaml
+  valuesFile: ../../../charts/podinfo/values.yaml
   additionalValuesFiles:
   - values.yaml
 
 resources:
-- ../../../apps/podinfo/
+- ../../../charts/podinfo/
 - pod.yaml
