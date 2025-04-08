@@ -14,7 +14,7 @@ spec:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         revision: main
         files:
-          - path: clusters/development/**/config-helm-plus.yaml
+          - path: clusters/development/**/config.helm-plus.yaml
   template:
     metadata:
       labels:
