@@ -31,7 +31,7 @@ spec:
         helm:
           valueFiles:
             - values.yaml  ## global values file beside the relevant Chart.yaml
-            - /{{ .path.path }}/values.yaml  ## override values file beside the config.yaml
+            - /{{ .path.path }}/values.yaml  ## override values file beside the configuration YAML
           ignoreMissingValueFiles: true
       - repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         path: '{{ .path.path }}/manifests/'

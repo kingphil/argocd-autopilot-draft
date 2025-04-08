@@ -13,7 +13,7 @@ spec:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         revision: development
         files:
-          - path: clusters/development/**/config.DEVEL.yaml
+          - path: clusters/development/**/config.helm.DEVEL.yaml
         template:
           metadata: {}  ## required
           spec:
@@ -22,7 +22,7 @@ spec:
               helm:
                 valueFiles:
                   #- values.yaml  ## global values file beside the relevant Chart.yaml
-                  - /{{ .path.path }}/values.yaml  ## override values file beside the config.yaml
+                  - /{{ .path.path }}/values.yaml  ## override values file beside the configuration YAML
                 ignoreMissingValueFiles: false
               repoURL: ""  ## required
             destination: {}  ## required
@@ -31,7 +31,7 @@ spec:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         revision: development
         files:
-          - path: clusters/development/**/config_dir.DEVEL.yaml
+          - path: clusters/development/**/config.dir.DEVEL.yaml
         template:
           metadata: {}  ## required
           spec:
