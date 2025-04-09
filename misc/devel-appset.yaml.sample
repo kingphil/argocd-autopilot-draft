@@ -13,7 +13,7 @@ spec:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         revision: development
         files:
-          - path: clusters/development/**/config.helm.DEVEL.yaml
+          - path: clusters/development/**/config.helm.yaml
         template:
           metadata: {}  ## required
           spec:
@@ -31,7 +31,7 @@ spec:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         revision: development
         files:
-          - path: clusters/development/**/config.dir.DEVEL.yaml
+          - path: clusters/development/**/config.dir.yaml
         template:
           metadata: {}  ## required
           spec:

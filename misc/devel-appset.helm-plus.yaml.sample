@@ -14,7 +14,7 @@ spec:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         revision: development
         files:
-          - path: clusters/development/**/config.helm-plus.DEVEL.yaml
+          - path: clusters/development/**/config.helm-plus.yaml
   syncPolicy:
     applicationsSync: create-delete
     preserveResourcesOnDeletion: false
