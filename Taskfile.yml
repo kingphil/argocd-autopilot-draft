@@ -16,8 +16,8 @@ tasks:
     desc: Helm install of cilium to current K8s context
     cmds:
       - helm repo add cilium https://helm.cilium.io/
-      - helm dep update examples/cilium/
-      - helm install --wait cilium examples/cilium/ -n kube-system
+      - helm dep update charts/cilium/
+      - helm install --wait cilium charts/cilium/ -n kube-system
 
   argocd-bootstrap:
     desc: Helm "bootstrap" install of argocd
