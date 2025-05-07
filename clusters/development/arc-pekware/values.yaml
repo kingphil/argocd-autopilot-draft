@@ -1,4 +1,8 @@
 gha-runner-scale-set:
+  controllerServiceAccount:
+    namespace: arc-systems
+    name: arc-systems
+
   githubConfigUrl: "https://github.com/pekware"
   githubConfigSecret: pre-defined-secret
   minRunners: 1

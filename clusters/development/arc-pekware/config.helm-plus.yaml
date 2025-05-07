@@ -1,7 +1,7 @@
-appName: gha-pekware
-userGivenName: gha-pekware
+appName: arc-pekware
+userGivenName: arc-pekware
 destNamespace: arc-runners
 destServer: https://kubernetes.default.svc
+srcPath: charts/arc-runners/
 srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git
-#srcTargetRevision: main
-srcTargetRevision: development
+srcTargetRevision: main
