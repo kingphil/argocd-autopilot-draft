@@ -1,7 +1,10 @@
 gha-runner-scale-set:
   controllerServiceAccount:
     namespace: arc-systems
-    name: arc-systems
+    name: arc-development-gha-rs-controller
+
+  #runnerGroup: base-staging
+  #runnerScaleSetName: base-staging
 
   githubConfigUrl: "https://github.com/pekware"
   githubConfigSecret: pre-defined-secret
