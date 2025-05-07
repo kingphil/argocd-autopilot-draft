@@ -4,7 +4,7 @@ tasks:
   kind-create:
     desc: Create kind development cluster
     cmds:
-      - kind create cluster --name lab --kubeconfig $HOME/.kube/kind --config misc/kind/kind.yaml
+      - kind create cluster --name lab --kubeconfig $HOME/.kube/kind --config tools/kind/kind.yaml
 
   kind-delete:
     desc: Delete kind development cluster
@@ -59,7 +59,7 @@ tasks:
   k3d-create:
     desc: Create k3d development cluster
     cmds:
-      - KUBECONFIG=$HOME/.kube/k3d k3d cluster create lab --config misc/k3d/k3d.yaml
+      - KUBECONFIG=$HOME/.kube/k3d k3d cluster create lab --config tools/k3d/k3d.yaml
 
   k3d-delete:
     desc: Delete k3d development cluster
