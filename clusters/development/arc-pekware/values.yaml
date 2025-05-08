@@ -1,15 +1,12 @@
 gha-runner-scale-set:
-  controllerServiceAccount:
-    namespace: arc-systems
-    name: arc-development-gha-rs-controller
-
-  #runnerGroup: base-staging
-  #runnerScaleSetName: base-staging
-
   githubConfigUrl: "https://github.com/pekware"
   githubConfigSecret: pre-defined-secret
   minRunners: 1
   maxRunners: 10
+
+  runnerGroup: pekware-on-prem
+  #runnerScaleSetName: base-staging
+
   containerMode:
     type: dind
   # controllerServiceAccount:
