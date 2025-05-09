@@ -11,4 +11,4 @@ gha-runner-scale-set:
     type: dind
   controllerServiceAccount:
     namespace: arc-systems
-    name: development-arc-gha-rs-controller
+    name: arc-systems
