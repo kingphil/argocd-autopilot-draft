@@ -3,7 +3,7 @@ podinfo:
     enabled: true
     className: nginx
     hosts:
-    - host: podinfo.development.pekware.club
+    - host: podinfo.development.home.arpa
       paths:
         - path: /
           pathType: ImplementationSpecific
