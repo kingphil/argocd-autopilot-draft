@@ -65,3 +65,25 @@ tasks:
     cmds:
       - KUBECONFIG=$HOME/.kube/k3d k3d cluster delete lab
       - rm -f $HOME/.kube/k3d
+
+  wip-gha-deps:
+    cmds:
+      - helm dependency build charts/gha-runner-scale-set-controller/
+
+  wip-arc-systems-reference:
+    cmds:
+      - |
+        NAMESPACE="arc-systems-reference"
+        helm install $NAMESPACE \
+          --namespace "${NAMESPACE}" \
+          --create-namespace \
+          oci://ghcr.io/actions/actions-runner-controller-charts/gha-runner-scale-set-controller \
+          --values clusters/development/gha-runner-scale-set-controller/values.yaml
+
+  wip-arc-systems-subchart:
+    cmds:
+      - |
+        NAMESPACE="arc-systems-subchart"
+        helm install --wait $NAMESPACE charts/gha-runner-scale-set-controller/ \
+          -n $NAMESPACE --create-namespace \
+          --values clusters/development/gha-runner-scale-set-controller/values.yaml
