@@ -1,3 +1,3 @@
-devel-app.yaml
-devel-appset.helm.yaml
-devel-appset.helm-plus.yaml
+*.devel-app.yaml
+*.devel-appset.helm.yaml
+*.devel-appset.helm-plus.yaml
