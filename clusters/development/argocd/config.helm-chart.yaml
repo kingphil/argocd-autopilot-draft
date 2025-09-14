@@ -1,0 +1,14 @@
+appName: argocd
+userGivenName: argocd
+destNamespace: argocd
+destServer: https://kubernetes.default.svc
+srcPath: charts/argocd
+srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+srcTargetRevision: main
+
+## https://artifacthub.io/packages/helm/argo/argo-cd
+## https://github.com/argoproj/argo-helm/tree/main/charts/argo-cd
+chart:
+  repository: https://argoproj.github.io/argo-helm
+  name: argo-cd
+  version: 7.9.x
