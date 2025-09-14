@@ -24,9 +24,8 @@ tasks:
     vars:
       CONTEXT: '{{default "development" .CONTEXT}}'
     cmds:
-      - helm repo add argo-helm https://argoproj.github.io/argo-helm
-      - helm dep update charts/argocd/
-      - helm install --wait argocd-{{.CONTEXT}} charts/argocd/ -n argocd --create-namespace --values clusters/{{.CONTEXT}}/argocd/values.yaml
+      - helm repo add argo https://argoproj.github.io/argo-helm
+      - helm install --wait argocd-{{.CONTEXT}} argo/argo-cd -n argocd --create-namespace --values clusters/{{.CONTEXT}}/argocd/values.yaml --version 7.9.x
       - kubectl create -f $HOME/povault/k8s-secrets/{{.CONTEXT}} || /bin/true
       - kubectl create -f clusters/{{.CONTEXT}}/
 
