@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  name: development-helm-chart
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+        revision: main
+        files:
+          - path: clusters/development/**/config.helm-chart.yaml
+  syncPolicy:
+    applicationsSync: create-delete
+    preserveResourcesOnDeletion: false
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: '{{ .appName }}'
+      name: '{{ .userGivenName }}-development'
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io/foreground
+    spec:
+      sources:
+      - repoURL: '{{ .chart.repository }}'
+        chart: '{{ .chart.name }}'
+        targetRevision: '{{ .chart.version }}'
+        helm:
+          ignoreMissingValueFiles: true
+          valueFiles:
+            ## global values (e.g. charts/APPNAME/values.yaml)
+            - $values/{{ .srcPath }}/values.yaml
+            ## override values (e.g. clusters/CLUSTER/APPNAME/values.yaml)
+            - $values/{{ .path.path }}/values.yaml
+      - repoURL: '{{ .srcRepoURL }}'
+        targetRevision: main
+        ref: values
+      destination:
+        namespace: '{{ .destNamespace }}'
+        server: '{{ .destServer }}'
+      project: default
+      syncPolicy:
+        automated:
+          allowEmpty: true
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
+        managedNamespaceMetadata:
+          ## https://github.com/argoproj/argo-cd/issues/7875
+          labels:
+            argocd.argoproj.io/instance: '{{ .userGivenName }}-development'
