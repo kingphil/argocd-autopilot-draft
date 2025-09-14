@@ -69,6 +69,7 @@ tasks:
   wip-gha-deps:
     cmds:
       - helm dependency build charts/gha-runner-scale-set-controller/
+      - helm dependency build charts/arc-runners/
 
   wip-arc-systems-reference:
     cmds:
@@ -83,7 +84,17 @@ tasks:
   wip-arc-systems-subchart:
     cmds:
       - |
-        NAMESPACE="arc-systems-subchart"
+        NAMESPACE="arc-systems"
         helm install --wait $NAMESPACE charts/gha-runner-scale-set-controller/ \
           -n $NAMESPACE --create-namespace \
           --values clusters/development/gha-runner-scale-set-controller/values.yaml
+
+  wip-arc-pekware:
+    cmds:
+      - |
+        kubectl create ns arc-pekware || /bin/true
+        kubectl create -f clusters/development/arc-pekware/manifests/sealed.secret.github-app.yaml || /bin/true
+        NAMESPACE="arc-pekware"
+        helm install --wait $NAMESPACE charts/arc-runners/ \
+          -n $NAMESPACE --create-namespace \
+          --values clusters/development/arc-pekware/values.yaml
