@@ -56,12 +56,16 @@ tasks:
         )
 
   k3d-create:
+    vars:
+      NAME: '{{default "lab" .NAME}}'
     desc: Create k3d development cluster
     cmds:
-      - KUBECONFIG=$HOME/.kube/k3d k3d cluster create lab --config tools/k3d/k3d.yaml
+      - KUBECONFIG=$HOME/.kube/{{.NAME}} k3d cluster create {{.NAME}} --config tools/k3d/k3d.{{.NAME}}.yaml
 
   k3d-delete:
     desc: Delete k3d development cluster
+    vars:
+      NAME: '{{default "k3d" .NAME}}'
     cmds:
-      - KUBECONFIG=$HOME/.kube/k3d k3d cluster delete lab
-      - rm -f $HOME/.kube/k3d
+      - KUBECONFIG=$HOME/.kube/{{.NAME}} k3d cluster delete {{.NAME}}
+      - rm -f $HOME/.kube/{{.NAME}}
