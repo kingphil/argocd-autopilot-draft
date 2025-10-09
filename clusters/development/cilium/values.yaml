@@ -1,5 +1,12 @@
 bgpControlPlane:
   enabled: true
 
+ingressController:
+  enabled: true
+  default: true
+
+nodePort:
+  enabled: true
+
 operator:
   replicas: 1
