@@ -9,6 +9,9 @@ ingressController:
   loadbalancerMode: shared
   defaultSecretNamespace: kube-system
   defaultSecretName: star.demo.codemonkeys.site
+  service:
+    insecureNodePort: 32080
+    secureNodePort: 32443
 
 nodePort:
   enabled: true
