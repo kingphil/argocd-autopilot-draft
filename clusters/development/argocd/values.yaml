@@ -1,5 +1,5 @@
 global:
-  domain: argocd.development.home.arpa
+  domain: argocd-home.demo.codemonkeys.site
 configs:
   cm:
     timeout.reconciliation: 10s  ## DEVEL
@@ -10,7 +10,9 @@ configs:
 server:
   ingress:
     enabled: true
-    #ingressClassName: nginx
     annotations:
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    extraTls:
+      - hosts:
+        - argocd-home.demo.codemonkeys.site
