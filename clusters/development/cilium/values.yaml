@@ -18,3 +18,15 @@ nodePort:
 
 operator:
   replicas: 1
+
+hubble:
+  ui:
+    enabled: true
+    ingress:
+      enabled: true
+      className: cilium
+      hosts:
+        - hubble-home.demo.codemonkeys.site
+      tls:
+        - hosts:
+            - hubble-home.demo.codemonkeys.site
