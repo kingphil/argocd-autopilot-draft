@@ -10,4 +10,4 @@ srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git
 chart:
   repository: https://helm.cilium.io/
   name: cilium
-  version: 1.17.x
+  version: 1.18.x
