@@ -1,5 +1,9 @@
 rollOutCiliumPods: true
 
+kubeProxyReplacement: true
+k8sServiceHost: 172.16.0.53
+k8sServicePort: 6443
+
 bgpControlPlane:
   enabled: true
 
@@ -9,12 +13,6 @@ ingressController:
   loadbalancerMode: shared
   defaultSecretNamespace: kube-system
   defaultSecretName: star.demo.codemonkeys.site
-  service:
-    insecureNodePort: 32080
-    secureNodePort: 32443
-
-nodePort:
-  enabled: true
 
 operator:
   replicas: 1
