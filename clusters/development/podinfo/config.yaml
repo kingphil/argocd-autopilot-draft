@@ -5,3 +5,9 @@ destServer: https://kubernetes.default.svc
 srcPath: charts/podinfo
 srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git
 srcTargetRevision: main
+
+## https://artifacthub.io/packages/helm/podinfo/podinfo
+chart:
+  repository: https://stefanprodan.github.io/podinfo
+  name: podinfo
+  version: 6.7.x
