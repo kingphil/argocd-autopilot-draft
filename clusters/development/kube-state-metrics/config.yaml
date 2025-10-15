@@ -1,0 +1,12 @@
+appName: kube-state-metrics
+userGivenName: kube-state-metrics
+destNamespace: monitoring
+destServer: https://kubernetes.default.svc
+srcPath: charts/kube-state-metrics/
+
+# https://artifacthub.io/packages/helm/prometheus-community/kube-state-metrics
+# helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+chart:
+  repository: https://prometheus-community.github.io/helm-charts
+  name: kube-state-metrics
+  version: 6.x
