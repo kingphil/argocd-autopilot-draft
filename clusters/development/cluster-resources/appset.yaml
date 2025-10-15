@@ -11,7 +11,8 @@ spec:
   generators:
     - git:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
-        revision: main
+        #revision: main
+        revision: 2025-10.appset
         files:
           ## explicit list for development cluster
           - path: clusters/development/argocd/config.yaml
@@ -30,7 +31,8 @@ spec:
     spec:
       sources:
       - repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
-        targetRevision: main
+        #targetRevision: main
+        targetRevision: 2025-10.appset
         ref: values
 
       - repoURL: '{{ .chart.repository }}'
@@ -45,7 +47,8 @@ spec:
             - $values/{{ .path.path }}/values.yaml
 
       - repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
-        targetRevision: main
+        #targetRevision: main
+        targetRevision: 2025-10.appset
         path: '{{ .path.path }}'
         ## manifests/ directory is *optional*
         directory:

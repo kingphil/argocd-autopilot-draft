@@ -10,7 +10,8 @@ metadata:
 spec:
   source:
     repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
-    targetRevision: main
+    #targetRevision: main
+    targetRevision: 2025-10.appset
     path: clusters/development/cluster-resources/
   destination:
     namespace: argocd
