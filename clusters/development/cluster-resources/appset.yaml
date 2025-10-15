@@ -1,0 +1,69 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
+  name: helm-chart-with-optional-manifests
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+        revision: main
+        files:
+          - path: clusters/development/**/config.yaml
+  syncPolicy:
+    applicationsSync: create-delete
+    preserveResourcesOnDeletion: false
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: '{{ .appName }}'
+      name: '{{ .userGivenName }}'
+      namespace: argocd
+      finalizers:
+        - resources-finalizer.argocd.argoproj.io/foreground
+    spec:
+      sources:
+      - repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+        targetRevision: main
+        ref: values
+
+      - repoURL: '{{ .chart.repository }}'
+        targetRevision: '{{ .chart.version }}'
+        chart: '{{ .chart.name }}'
+        helm:
+          ignoreMissingValueFiles: true
+          valueFiles:
+            ## global values (e.g. charts/APPNAME/values.yaml)
+            - $values/{{ .srcPath }}/values.yaml
+            ## cluster specific values (e.g. clusters/CLUSTER/APPNAME/values.yaml)
+            - $values/{{ .path.path }}/values.yaml
+
+      - repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+        targetRevision: main
+        path: '{{ .path.path }}'
+        ## manifests/ directory is *optional*
+        directory:
+          include: "manifests/*"
+          recurse: true
+
+      destination:
+        namespace: '{{ .destNamespace }}'
+        server: '{{ .destServer }}'
+      project: default
+      syncPolicy:
+        automated:
+          allowEmpty: true
+          prune: true
+          selfHeal: true
+        syncOptions:
+        - CreateNamespace=true
+        - ServerSideApply=true
+        managedNamespaceMetadata:
+          ## so the deletion of the App also removes the namespace it creates
+          ## https://github.com/argoproj/argo-cd/issues/7875
+          labels:
+            argocd.argoproj.io/instance: '{{ .userGivenName }}'
