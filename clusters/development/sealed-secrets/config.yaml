@@ -5,3 +5,9 @@ destServer: https://kubernetes.default.svc
 srcPath: charts/sealed-secrets/
 srcRepoURL: https://github.com/kingphil/argocd-autopilot-draft.git
 srcTargetRevision: main 
+
+## https://artifacthub.io/packages/helm/bitnami-labs/sealed-secrets
+chart:
+  repository: https://bitnami-labs.github.io/sealed-secrets/
+  name: sealed-secrets
+  version: 2.17.x
