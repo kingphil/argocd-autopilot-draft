@@ -9,8 +9,9 @@ metadata:
   namespace: argocd
 spec:
   source:
-    path: clusters/development/cluster-resources/
     repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
+    targetRevision: main
+    path: clusters/development/cluster-resources/
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
