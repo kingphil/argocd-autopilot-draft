@@ -13,7 +13,9 @@ spec:
         repoURL: https://github.com/kingphil/argocd-autopilot-draft.git
         revision: main
         files:
-          - path: clusters/development/**/config.yaml
+          ## explicit list for development cluster
+          - path: clusters/development/argocd/config.yaml
+          - path: clusters/development/sealed-secrets/config.yaml
   syncPolicy:
     applicationsSync: create-delete
     preserveResourcesOnDeletion: false
