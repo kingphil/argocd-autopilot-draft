@@ -5,6 +5,12 @@ rollOutCiliumPods: true
 # autoDirectNodeRoutes: true
 # ipv4NativeRoutingCIDR: 172.16.0.0/12
 
+ipam:
+  operator:
+    clusterPoolIPv4PodCIDRList:
+      - 172.17.1.0/24
+    clusterPoolIPv4MaskSize: 24
+
 kubeProxyReplacement: true
 #k8sServiceHost: 172.16.0.53  ## haproxy (for k3s-home-ha cluster)
 k8sServiceHost: 172.16.0.54  ## k3s-single
