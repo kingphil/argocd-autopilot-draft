@@ -78,3 +78,10 @@ tasks:
     cmds:
       - KUBECONFIG=$HOME/.kube/{{.NAME}} k3d cluster delete {{.NAME}}
       - rm -f $HOME/.kube/{{.NAME}}
+
+  run-netshoot:
+    desc: Run netshoot pod (in current context) for network diagnosis
+    vars:
+      COMMAND: '{{default "sh" .COMMAND}}'
+    cmds:
+      - kubectl run netshoot --image=nicolaka/netshoot --rm -it --restart=Never -- {{.COMMAND}}
