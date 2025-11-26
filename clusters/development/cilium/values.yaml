@@ -1,7 +1,7 @@
 rollOutCiliumPods: true
 
 # https://docs.cilium.io/en/stable/network/concepts/routing/#native-routing
-# routingMode: native
+routingMode: tunnel
 # autoDirectNodeRoutes: true
 # ipv4NativeRoutingCIDR: 172.16.0.0/12
 
