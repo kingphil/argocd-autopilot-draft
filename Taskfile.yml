@@ -28,6 +28,28 @@ tasks:
           --version $CILIUM_VERSION \
           cilium/cilium
 
+  cilium-install-alpha:
+    desc: Helm install of cilium to current K8s context
+    vars:
+      CONTEXT: '{{default "development" .CONTEXT}}'
+    cmds:
+      - helm repo add cilium https://helm.cilium.io/
+      - helm repo update cilium
+      - |
+        CILIUM_VERSION=1.18.x
+        helm upgrade --install cilium \
+          -n kube-system \
+          --values charts/cilium/values.yaml \
+          --values clusters/{{.CONTEXT}}/cilium/values.yaml \
+          --version $CILIUM_VERSION \
+          cilium/cilium
+      - kubectl -n kube-system wait --for=condition=Available deployment/cilium-operator --timeout=300s
+      - kubectl -n kube-system rollout status ds/cilium-envoy
+      - |
+        if [ -d "clusters/{{.CONTEXT}}/cilium/manifests/" ]; then
+            kubectl apply -f clusters/{{.CONTEXT}}/cilium/manifests/
+        fi
+
   argocd-bootstrap:
     desc: Helm "bootstrap" install of argocd
     vars:
