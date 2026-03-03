@@ -36,7 +36,7 @@ tasks:
       - helm repo add cilium https://helm.cilium.io/
       - helm repo update cilium
       - |
-        CILIUM_VERSION=1.18.x
+        CILIUM_VERSION=1.19.x
         helm upgrade --install cilium \
           -n kube-system \
           --values charts/cilium/values.yaml \

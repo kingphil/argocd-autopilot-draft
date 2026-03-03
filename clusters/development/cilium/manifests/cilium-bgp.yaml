@@ -1,4 +1,4 @@
-apiVersion: cilium.io/v2alpha1
+apiVersion: cilium.io/v2
 kind: CiliumBGPClusterConfig
 metadata:
   name: cilium-bgp
@@ -12,12 +12,12 @@ spec:
       ## router ASN
       peerASN: 65551
       ## router LAN IP
-      peerAddress: 172.16.0.1
+      peerAddress: 192.168.8.1
       peerConfigRef:
         name: "cilium-peer"
 
 ---
-apiVersion: cilium.io/v2alpha1
+apiVersion: cilium.io/v2
 kind: CiliumBGPPeerConfig
 metadata:
   name: cilium-peer
@@ -30,7 +30,7 @@ spec:
           advertise: "bgp"
 
 ---
-apiVersion: cilium.io/v2alpha1
+apiVersion: cilium.io/v2
 kind: CiliumBGPAdvertisement
 metadata:
   name: bgp-advertisements
@@ -47,12 +47,12 @@ spec:
           - { key: somekey, operator: NotIn, values: [ never-used-value ] }
 
 ---
-apiVersion: "cilium.io/v2alpha1"
+apiVersion: cilium.io/v2
 kind: CiliumLoadBalancerIPPool
 metadata:
   name: "default-pool"
 spec:
   blocks:
   # note: non-LAN IP range
-  - start: 172.22.147.100
-    stop: 172.22.147.250
+  - start: 192.168.13.100
+    stop: 192.168.13.250
