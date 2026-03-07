@@ -15,7 +15,7 @@ tasks:
   cilium-install:
     desc: Helm install of cilium to current K8s context
     vars:
-      CONTEXT: '{{default "development" .CONTEXT}}'
+      CONTEXT: '{{default "clusters/development" .CONTEXT}}'
     cmds:
       - helm repo add cilium https://helm.cilium.io/
       - helm repo update cilium
@@ -24,14 +24,14 @@ tasks:
         helm upgrade --install --wait cilium \
           -n kube-system \
           --values charts/cilium/values.yaml \
-          --values clusters/{{.CONTEXT}}/cilium/values.yaml \
+          --values {{.CONTEXT}}/cilium/values.yaml \
           --version $CILIUM_VERSION \
           cilium/cilium
 
   cilium-install-alpha:
     desc: Helm install of cilium to current K8s context
     vars:
-      CONTEXT: '{{default "development" .CONTEXT}}'
+      CONTEXT: '{{default "clusters/development" .CONTEXT}}'
     cmds:
       - helm repo add cilium https://helm.cilium.io/
       - helm repo update cilium
@@ -40,25 +40,25 @@ tasks:
         helm upgrade --install cilium \
           -n kube-system \
           --values charts/cilium/values.yaml \
-          --values clusters/{{.CONTEXT}}/cilium/values.yaml \
+          --values {{.CONTEXT}}/cilium/values.yaml \
           --version $CILIUM_VERSION \
           cilium/cilium
       - kubectl -n kube-system wait --for=condition=Available deployment/cilium-operator --timeout=300s
       - kubectl -n kube-system rollout status ds/cilium-envoy
       - |
-        if [ -d "clusters/{{.CONTEXT}}/cilium/manifests/" ]; then
-            kubectl apply -f clusters/{{.CONTEXT}}/cilium/manifests/
+        if [ -d "{{.CONTEXT}}/cilium/manifests/" ]; then
+            kubectl apply -f {{.CONTEXT}}/cilium/manifests/
         fi
 
   argocd-bootstrap:
     desc: Helm "bootstrap" install of argocd
     vars:
-      CONTEXT: '{{default "development" .CONTEXT}}'
+      CONTEXT: '{{default "clusters/development" .CONTEXT}}'
     cmds:
       - helm repo add argo https://argoproj.github.io/argo-helm
-      - helm install --wait argocd argo/argo-cd -n argocd --create-namespace --values clusters/{{.CONTEXT}}/argocd/values.yaml --version 7.9.x
-      - kubectl create -f $HOME/povault/k8s-secrets/{{.CONTEXT}} || /bin/true
-      - kubectl create -f clusters/{{.CONTEXT}}/
+      - helm install --wait argocd argo/argo-cd -n argocd --create-namespace --values {{.CONTEXT}}/argocd/values.yaml --version 7.9.x
+      - kubectl create -f $HOME/povault/k8s-secrets/{{.CONTEXT}}/ || /bin/true
+      - kubectl create -f {{.CONTEXT}}/
 
   kind-install:
     desc: Install kind
