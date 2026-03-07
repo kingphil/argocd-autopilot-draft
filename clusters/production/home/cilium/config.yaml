@@ -1,0 +1,12 @@
+appName: cilium
+userGivenName: cilium
+destNamespace: kube-system
+destServer: https://kubernetes.default.svc
+srcPath: charts/cilium/
+
+# https://github.com/cilium/cilium/tree/main/install/kubernetes/cilium
+# https://artifacthub.io/packages/helm/cilium/cilium
+chart:
+  repository: https://helm.cilium.io/
+  name: cilium
+  version: 1.19.x

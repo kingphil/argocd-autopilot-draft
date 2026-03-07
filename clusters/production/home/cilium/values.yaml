@@ -1,0 +1,22 @@
+rollOutCiliumPods: true
+
+# https://docs.cilium.io/en/stable/network/concepts/routing/
+routingMode: tunnel
+
+kubeProxyReplacement: true
+
+k8sServiceHost: 192.168.8.53
+k8sServicePort: 6443
+
+bgpControlPlane:
+  enabled: true
+
+ingressController:
+  enabled: true
+  default: true
+  loadbalancerMode: shared
+  defaultSecretNamespace: kube-system
+  defaultSecretName: star.demo.codemonkeys.site
+
+operator:
+  replicas: 1

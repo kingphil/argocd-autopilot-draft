@@ -1,0 +1,58 @@
+apiVersion: cilium.io/v2
+kind: CiliumBGPClusterConfig
+metadata:
+  name: cilium-bgp
+spec:
+  bgpInstances:
+  - name: "bgp-k8s-cilium"
+    # Cilium ASN
+    localASN: 64521
+    peers:
+    - name: "router-peer"
+      ## router ASN
+      peerASN: 65551
+      ## router LAN IP
+      peerAddress: 192.168.8.1
+      peerConfigRef:
+        name: "cilium-peer"
+
+---
+apiVersion: cilium.io/v2
+kind: CiliumBGPPeerConfig
+metadata:
+  name: cilium-peer
+spec:
+  families:
+    - afi: ipv4
+      safi: unicast
+      advertisements:
+        matchLabels:
+          advertise: "bgp"
+
+---
+apiVersion: cilium.io/v2
+kind: CiliumBGPAdvertisement
+metadata:
+  name: bgp-advertisements
+  labels:
+    advertise: bgp
+spec:
+  advertisements:
+    - advertisementType: "Service"
+      service:
+        addresses:
+          - LoadBalancerIP
+      selector:
+        matchExpressions:
+          - { key: somekey, operator: NotIn, values: [ never-used-value ] }
+
+---
+apiVersion: cilium.io/v2
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: "default-pool"
+spec:
+  blocks:
+  # note: non-LAN IP range
+  - start: 192.168.13.111
+    stop: 192.168.13.120
