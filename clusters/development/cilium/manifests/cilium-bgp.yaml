@@ -54,5 +54,5 @@ metadata:
 spec:
   blocks:
   # note: non-LAN IP range
-  - start: 192.168.13.100
-    stop: 192.168.13.250
+  - start: 192.168.13.101
+    stop: 192.168.13.110
